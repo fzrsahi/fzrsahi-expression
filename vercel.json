@@ -11,11 +11,5 @@
             "src":"./index.js",
             "dest": ""
         }
-    ],
-    "views":[
-        {
-            "src":"./views/*",
-            "dest": ""
-        }
     ]
 }
