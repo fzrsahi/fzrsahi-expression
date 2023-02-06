@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="css/fontawesome/css/all.css">
+  <link rel="stylesheet" href="sweetalert2.min.css">
+
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="preloader">
+  </div>
+  <header>
+    <nav>
+      <h1>Expression</h1>
+      <% if(locals.isLoggedIn){ %>
+        <h5>Welcome <%=locals.username%>! </h5>
+        <% } %>
+
+          <ul>
+            <% if(!locals.isLoggedIn){ %>
+              <li>
+                <p id="login" class="login">LOGIN</p>
+              </li>
+              <% } %>
+
+                <% if(locals.isLoggedIn){ %>
+                  <li>
+                    <a href='/logout' class="login">LOGOUT</a>
+                  </li>
+                  <% }%>
+          </ul>
+
+
+    </nav>
+  </header>
+  <main>
+
+    <div class="top wrapper">
+      <div class="text-top">
+        <% if(locals.passwordSalah){%>
+          <div class="error-notif" id="error-notif" style="filter: blur(20x);">
+            <i class="fa-solid fa-xmark" id="iconEmpat"></i>
+            <h3>Akun tidak Ditemukan!</h3>
+            <p>Mohon Periksa Email Atau Password</p>
+          </div>
+          <%} %>
+            <% if(locals.emailIsExist){%>
+              <div class="error-notif" id="error-notif" style="filter: blur(20x);">
+                <i class="fa-solid fa-xmark" id="iconEmpat"></i>
+                <h3>Email Sudah Terdaftar!</h3>
+                <p>Mohon Gunakan Email yang lain</p>
+              </div>
+              <%} %>
+                <h1>Selamat Datang Di <span>Expression</span></h1>
+                <p>"Perjalanan ribuan mil dimulai dengan langkah pertama.” –Lao Tzu.</p>
+      </div>
+      <div class="btn" id="getstarted">
+        <a href="#jumbotron-1">Get Started</a>
+      </div>
+    </div>
+    <div class="jumbotron" id="jumbotron-1">
+      <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
+      <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. </h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exerc<br>itation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.<br> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+        nulla pariatur. Excepteur sint occaecat cupidatat non<br> proident, sunt in culpa qui officia deserunt mollit
+        anim id est laborum.</p>
+    </div>
+    <div class="nav-mid">
+      <ul>
+        <li> <a href="#quotes">Spread your words</a></li>
+        <li><a href="#content">Best Quotes</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+    <div class="quotes" id="quotes">
+      <h1>Add Your favorite Quotes</h1>
+      <form action="/quotes" method="POST">
+        <input type="text" name="title" id="title" placeholder="Your Title here" class="value" required><br>
+        <input type="text" name="quotes" id="quotes" placeholder="Your quotes here" class="value" required><br>
+        <input type="submit" name="" class="submit submit-one" value="Spread Your Words">
+      </form>
+      <img src="/img/icon1.png" class="icon sawah">
+    </div>
+    <div class="jumbotron">
+      <h1 class="title-jumbotron">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
+    </div>
+    <div class="content" id="content">
+      <!-- <div class="content-main"></div> -->
+
+      <% result.forEach(data=> { %>
+        <div class="card quotes-one">
+          <a href="/detail/<%= data.id %>"><i class="fa-solid fa-circle-info"></i></a>
+          <h4>
+            <%=data.title %>
+          </h4>
+          <p>
+            <%=data.words %>
+          </p>
+          <span> - <%=data.username %> </span>
+        </div>
+        <%}); %>
+
+
+
+    </div>
+    <div class="jumbotron">
+      <h1 class="title-jumbotron">Lorem ipsum dolor sit amet,consectetur adipiscing elit</h1>
+    </div>
+    <aside>
+      <div class="profile" id="about">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-team">
+              <div class="picture">
+                <img class="img-fluid" src="/img/profile.JPG">
+              </div>
+              <div class="team-content">
+                <h3 class="name">Fazrul Sahi</h3>
+                <h4 class="title">Beginner</h4>
+              </div>
+              <ul class="social">
+                <li><a href="#" <i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href="#" <i class="fa-brands fa-github"></i></a></li>
+                <li><a href="#" <i class="fa-brands fa-linkedin"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+  <footer>
+    <div class="footer-title">
+      <h1>Expression</h1>
+      <div class="copyright">
+        <p>© Expression 2022</p>
+      </div>
+    </div>
+    <div class="footer-paragraph">
+      <p>Font Source : Google Font</p>
+      <p>Image Source : Ghibli Studio</p>
+      <p>Icon Source : Fontawesome</p>
+
+    </div>
+
+  </footer>
+  <div class="form form-login" id="form-login">
+    <i class="fa-solid fa-xmark" id="iconSatu"></i>
+    <form action="/login" method="post">
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" placeholder="person@email.com" required><br>
+      <label for="password">Password:</label><br>
+      <input type="password" id="password" name="password" required><br>
+      <input type="submit" class="submit submit-two" value="Gas login!" id="submit-one"><br>
+      <p>or</p><br>
+      <span class="submit submit-three">Register</span>
+    </form>
+  </div>
+  <div class="form form-regis" id="form-regis">
+    <i class="fa-solid fa-xmark" id="iconDua"></i>
+    <form action="/regis" method="POST">
+      <label for="email">Username:</label><br>
+      <input type="text" id="username" name="username" placeholder="" required><br>
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" placeholder="person@email.com" required><br>
+      <label for="password">Password:</label><br>
+      <input type="password" id="password" name="password" required><br>
+      <input type="submit" class="submit submit-two" value="Gas Regis!"><br>
+      <p>or have account</p><br>
+      <span class="submit submit-three loginRegis">Sign In</span>
+    </form>
+  </div>
+  <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="sweetalert2.all.min.js"></script> -->
+  <script src="script/script.js"></script>
+
+</body>
+
+</html>
